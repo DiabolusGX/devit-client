@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+body {
+    background-color: #141416;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.gradient_text_og_global {
+    background-image: linear-gradient(135deg, #93c497 10%, #e06068 60%);
+    background-clip: text;
+    color: transparent;
+    // background-image: url('https://res.cloudinary.com/doy1foyff/image/upload/v1637853127/pinkbg_yxco82.png');
+    // -webkit-background-clip: text;
+    // -w
+}
+.gradient_og_global {
+    background-image: linear-gradient(135deg, #93c497 5%, #e06068 60%);
+}
