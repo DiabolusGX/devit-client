@@ -144,7 +144,7 @@ const Home = () => {
             </div>
             {/* ------------- Showcase-2------------- */}
             <div
-                style={{ backgroundImage: "url('/images/pinkbg.png')" }}
+                style={{ backgroundImage: "url('/images/orangebg.png')" }}
                 className='h-screen flex items-center justify-between px-20 bg-cover bg-left'
             >
                 <div className='w-5/12'>
@@ -154,7 +154,7 @@ const Home = () => {
                     <h2 className='font-extrabold text-6xl leading-tight mb-8 text-white-100'>
                         Know all <br /> about your devmate.
                     </h2>
-                    <p className='text-white-200 text-lg'>
+                    <p className='text-white-200 text-lg font-medium'>
                         Your mastery in a technology is categorized in multiple
                         stages for you to become comfortable with peers who are
                         in your stage of learning. You can check all the details
@@ -165,10 +165,10 @@ const Home = () => {
             </div>
             {/* ------------- Showcase-3------------- */}
             <div className='h-screen flex items-center justify-between bg-white-200 px-20'>
-                <div className='w-5/12'>
-                    <h2 className='relative font-extrabold text-6xl leading-tight mb-8 text-black-100'>
-                        Get all your <br />
-                        doubts cleared with threads.
+                <div className='w-1/2'>
+                    <h2 className='relative font-extrabold text-5xl leading-tight mb-8 text-black-100'>
+                        Clear all your <br />
+                        doubts with <br /> threads.
                         <img
                             className='absolute -top-10'
                             src='/images/green-wave.png'
@@ -183,7 +183,7 @@ const Home = () => {
                     </p>
                 </div>
                 <div className='w-5/12'>
-                    <img src='/images/threads.png' alt='channel' />
+                    <img src='/images/threads-green.png' alt='channel' />
                 </div>
             </div>
             {/* ------------- Call to action------------- */}
@@ -192,9 +192,12 @@ const Home = () => {
                     <h1 className=' text-grey-100 text-center text-8xl font-bold opacity-20 z-0'>
                         Join. Learn. Grow
                     </h1>
-                    <button className='gradient_og_global py-4 px-10 text-2xl font-semibold rounded-full mt-14 '>
+                    <Link
+                        to='/authenticate'
+                        className='gradient_og_global py-4 px-10 text-2xl font-semibold rounded-full mt-14 '
+                    >
                         Join the community
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
