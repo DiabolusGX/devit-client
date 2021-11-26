@@ -1,6 +1,7 @@
 import React from 'react';
 import { SecondaryButton } from '../..';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
     const { isAuth } = useSelector((state) => state.auth);
     return (
@@ -9,9 +10,9 @@ const Navbar = () => {
                 id='nav-left'
                 className='flex items-center justify-between w-2/5'
             >
-                <a href='/' className='text-lg -mt-1'>
+                <Link to='/' className='text-lg -mt-1'>
                     <img className='w-20' src='/images/logo.svg' alt='logo' />
-                </a>
+                </Link>
                 <a href='#features' className='text-lg'>
                     Features
                 </a>

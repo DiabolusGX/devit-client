@@ -2,6 +2,22 @@ module.exports = {
     purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
     darkMode: false, // or 'media' or 'class'
     theme: {
+        fontSize: {
+            xs: '.75rem',
+            sm: '.875rem',
+            tiny: '.875rem',
+            base: '1rem',
+            lg: '1.125rem',
+            xl: '1.25rem',
+            '2xl': '1.5rem',
+            '3xl': '1.875rem',
+            '4xl': '2.25rem',
+            '5xl': '3.5rem',
+            '6xl': '4rem',
+            '7xl': '5rem',
+            '8xl': '6rem',
+            '9xl': '8rem',
+        },
         colors: {
             red: {
                 100: '#E0565F',
@@ -31,7 +47,11 @@ module.exports = {
                 200: '#F6F6F6',
             },
         },
-        extend: {},
+        extend: {
+            dropShadow: {
+                'custom-black-100': '0px 4px 8px rgba(0, 0, 0, 0.25)',
+            },
+        },
     },
     variants: {
         extend: {},
