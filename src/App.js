@@ -15,7 +15,6 @@ function App() {
         const fetchUser = async () => {
             setLoading(true);
             const { data } = await getAuthorizedUser();
-            console.log(data);
             dispatch(setAuth(data));
             setLoading(false);
         };
@@ -62,7 +61,7 @@ const SemiProtectedRoute = ({ component }) => {
 };
 const ProtectedRoute = ({ component }) => {
     const { isAuth, user } = useSelector((state) => state.auth);
-    console.log(isAuth);
+
     return !isAuth ? (
         <Navigate replace to='/authenticate' />
     ) : isAuth && !user.isActivated ? (

@@ -36,6 +36,7 @@ module.exports = {
             black: {
                 100: '#141416',
                 200: '#212121',
+                300: '#323232',
             },
             grey: {
                 100: '#E5E5E5',
@@ -50,6 +51,7 @@ module.exports = {
         extend: {
             dropShadow: {
                 'custom-black-100': '0px 4px 8px rgba(0, 0, 0, 0.25)',
+                'custom-black-200': '0px 8px 16px rgba(0, 0, 0, 0.25);',
             },
         },
     },
@@ -58,3 +60,4 @@ module.exports = {
     },
     plugins: [],
 };
+/* Rectangle 23 */
