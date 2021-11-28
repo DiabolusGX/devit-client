@@ -13,15 +13,19 @@ const Navbar = () => {
                 <Link to='/' className='text-lg -mt-1'>
                     <img className='w-20' src='/images/logo.svg' alt='logo' />
                 </Link>
-                <a href='#features' className='text-lg'>
-                    Features
-                </a>
-                <a href='/about' className='text-lg'>
-                    About
-                </a>
-                <a href='/contact' className='text-lg'>
-                    Contact
-                </a>
+                {!isAuth && (
+                    <>
+                        <a href='#features' className='text-lg'>
+                            Features
+                        </a>
+                        <a href='/about' className='text-lg'>
+                            About
+                        </a>
+                        <a href='/contact' className='text-lg'>
+                            Contact
+                        </a>
+                    </>
+                )}
             </div>
             {!isAuth && (
                 <div id='nav-right'>

@@ -1,6 +1,11 @@
 export { default as Navbar } from './shared/Navbar/Navbar';
 export { default as Loader } from './shared/Loader/Loader';
+export { default as CheckButton } from './shared/Buttons/CheckButton/CheckButton';
 export { default as SecondaryButton } from './shared/Buttons/SecondaryButton/SecondaryButton';
 export { default as PrimaryButton } from './shared/Buttons/PrimaryButton/PrimaryButton';
 export { default as TestimonialSlider } from './TestimonialSlider/TestimonialSlider';
 export { default as FeatureCard } from './shared/FeatureCard/FeatureCard';
+export { default as ImgCard } from './shared/Cards/ImgCard/ImgCard';
+export { default as Card } from './shared/Cards/Card/Card';
+export { default as TextInput } from './shared/Inputs/TextInput/TextInput';
+export { default as TextArea } from './shared/Inputs/TextArea/TextArea';
