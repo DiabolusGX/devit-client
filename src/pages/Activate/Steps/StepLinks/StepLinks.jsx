@@ -23,7 +23,10 @@ const StepLinks = ({ changeStep }) => {
                 />
             </div>
             <div>
-                <Card heading='😎 Showcase your social success'>
+                <Card
+                    heading='Showcase your social success'
+                    imgPath='./images/monkey.svg'
+                >
                     <TextInput
                         placeholder='LinkedIn Link.'
                         value={socialLinks.linkedin}

@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
 import { BsArrowRightCircle, BsArrowRightShort } from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
-import { Card, ImgCard, Loader } from '../../../../components';
+import { Card, ImgCard } from '../../../../components';
 import { setAvatar } from '../../../../store/activateSlice';
 const StepAvatar = ({ changeStep }) => {
-    const { name, avatar } = useSelector((state) => state.activate);
+    const { username } = useSelector((state) => state.activate);
+
     const dispatch = useDispatch();
     const [image, setImage] = useState('/images/abhay.png');
     const captureImage = (e) => {
@@ -30,9 +30,12 @@ const StepAvatar = ({ changeStep }) => {
                 />
             </div>
             <div>
-                <Card heading={`🎃 What a nice name, ${name}!`}>
-                    <p className='text-grey-200 text-sm leading-snug mb-4 '>
-                        How's this photo?
+                <Card
+                    heading={`What a nice name, ${username}!`}
+                    imgPath='./images/bird.svg'
+                >
+                    <p className='text-grey-200 leading-snug mb-4 '>
+                        How's this one?
                     </p>
 
                     <img className='img_og mb-4' src={image} alt='avatar' />

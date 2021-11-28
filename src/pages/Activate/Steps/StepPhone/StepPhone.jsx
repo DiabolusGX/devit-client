@@ -61,7 +61,10 @@ const StepPhone = ({ changeStep }) => {
                 />
             </div>
             <div>
-                <Card heading='🎉You are almost ready!'>
+                <Card
+                    heading='You are almost ready!'
+                    imgPath='./images/party.svg'
+                >
                     <TextInput
                         placeholder='Phone number..'
                         value={userInfo.phone}
@@ -74,7 +77,7 @@ const StepPhone = ({ changeStep }) => {
                             })
                         }
                     />
-                    <TextArea
+                    <TextInput
                         placeholder='Your bio...'
                         value={userInfo.bio}
                         onChange={(e) =>

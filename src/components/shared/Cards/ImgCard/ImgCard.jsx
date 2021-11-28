@@ -11,7 +11,7 @@ const ImgCard = ({ heading, subheading }) => {
             />
 
             <div>
-                <h2 className='text-red-100 font-semibold mb-1 text-xl'>
+                <h2 className='text-red-100 font-medium mb-1 text-2xl'>
                     {heading}
                 </h2>
                 <p className='text-grey-200'>{subheading}</p>

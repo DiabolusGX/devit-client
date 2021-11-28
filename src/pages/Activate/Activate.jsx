@@ -23,9 +23,6 @@ const Activate = () => {
     return (
         <>
             <Step changeStep={() => setStep(step + 1)} />
-            <button className='text-grey-300' onClick={onLogout}>
-                Logout
-            </button>
         </>
     );
 };

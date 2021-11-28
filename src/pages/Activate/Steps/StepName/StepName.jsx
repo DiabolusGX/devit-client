@@ -23,14 +23,17 @@ const StepName = ({ changeStep }) => {
                 />
             </div>
             <div>
-                <Card heading='👋 Enter your username'>
+                <Card
+                    heading='Enter your username'
+                    imgPath='./images/handwave.svg'
+                >
                     <TextInput
                         placeholder='Make it unique...'
                         value={fullname}
                         onChange={(e) => setFullname(e.target.value)}
                     />
                     <button
-                        className=' flex items-center px-6 py-3 bg-black-100 rounded-lg text-yellow-100 drop-shadow-custom-black-100 mb-4 mt-2'
+                        className=' flex items-center px-6 py-3 bg-black-100 rounded-lg text-yellow-100 drop-shadow-custom-black-100 mb-4'
                         onClick={submitName}
                     >
                         <span className='mr-4 text-lg font-medium'>Next</span>
