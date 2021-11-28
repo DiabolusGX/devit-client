@@ -9,7 +9,7 @@ const CheckButton = (props) => {
                 value={props.name}
             />
             <label
-                className='flex items-center bg-black-300 mb-6 mr-4 py-3 px-6 text-grey-100 inline-block  rounded-lg focus:outline-none'
+                className='flex items-center bg-black-300 mb-6 mr-4 py-3 px-6 text-grey-100 rounded-lg focus:outline-none'
                 for={props.name}
             >
                 <span>{props.name}</span>
