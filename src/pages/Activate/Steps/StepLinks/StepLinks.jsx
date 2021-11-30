@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { BsArrowRightCircle } from 'react-icons/bs';
+import { BsArrowRightCircle, BsArrowLeftCircle } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, ImgCard, TextInput } from '../../../../components';
 
 import { setLinks } from '../../../../store/activateSlice';
 
-const StepLinks = ({ changeStep }) => {
+const StepLinks = ({ changeStep, backStep }) => {
     const dispatch = useDispatch();
     const { links } = useSelector((state) => state.activate);
     const [socialLinks, setSocialLinks] = useState(links);
@@ -64,6 +64,12 @@ const StepLinks = ({ changeStep }) => {
                     >
                         <span className='mr-4 text-lg font-medium'>Next</span>
                         <BsArrowRightCircle size='1.5rem' />
+                    </button>
+                    <button
+                        className=' absolute bottom-5 left-5 text-yellow-100 '
+                        onClick={backStep}
+                    >
+                        <BsArrowLeftCircle size='1.5rem' />
                     </button>
                 </Card>
             </div>

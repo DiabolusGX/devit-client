@@ -1,25 +1,24 @@
-import { useState, useEffect } from 'react';
-import { BsArrowRightCircle } from 'react-icons/bs';
+import { useState, useEffect, useRef } from 'react';
+import { BsArrowRightCircle, BsArrowLeftCircle } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Card,
     CheckButton,
     ImgCard,
     Loader,
-    TextArea,
     TextInput,
 } from '../../../../components';
 import { setAuth } from '../.././../../store/authSlice';
 import { setPersonalInfo } from '../../../../store/activateSlice';
 import { activate } from '../../../../http';
 
-const StepPhone = ({ changeStep }) => {
+const StepPhone = ({ step, backStep }) => {
     const dispatch = useDispatch();
+
     const activateState = useSelector((state) => state.activate);
-    const { phone, bio, gender } = activateState;
-    const [userInfo, setUserInfo] = useState({ phone, bio, gender });
+    const { phoneNumber, bio, gender } = activateState;
+    const [userInfo, setUserInfo] = useState({ phoneNumber, bio, gender });
     const [loading, setLoading] = useState(false);
-    const [unmounted, setUnmounted] = useState(false);
 
     const genderChange = (e) => {
         setUserInfo((prevState) => {
@@ -29,28 +28,31 @@ const StepPhone = ({ changeStep }) => {
             };
         });
     };
-    const submit = async () => {
-        setLoading(true);
-        dispatch(setPersonalInfo(userInfo));
-        try {
-            const { data } = await activate(activateState);
-            if (data.auth) {
-                //check if component has unmounted
-                if (!unmounted) {
-                    dispatch(setAuth(data));
-                }
-            }
-        } catch (err) {
-            console.log(err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const isFirstRender = useRef(true);
     useEffect(() => {
-        return () => {
-            setUnmounted(true);
-        };
-    }, []);
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+        } else {
+            step === 4 &&
+                (async () => {
+                    setLoading(true);
+                    try {
+                        const { data } = await activate(activateState);
+                        if (data.bio) {
+                            dispatch(setAuth(data));
+                        }
+                    } catch (err) {
+                        console.log(err);
+                    } finally {
+                        setLoading(false);
+                    }
+                })();
+        }
+    }, [dispatch, activateState, step]);
+    const submit = async () => {
+        dispatch(setPersonalInfo(userInfo));
+    };
+
     if (loading) return <Loader message='Activation in Progress' />;
     return (
         <div className='relative'>
@@ -67,12 +69,12 @@ const StepPhone = ({ changeStep }) => {
                 >
                     <TextInput
                         placeholder='Phone number..'
-                        value={userInfo.phone}
+                        value={userInfo.phoneNumber}
                         onChange={(e) =>
                             setUserInfo((prevState) => {
                                 return {
                                     ...prevState,
-                                    phone: e.target.value,
+                                    phoneNumber: e.target.value,
                                 };
                             })
                         }
@@ -112,6 +114,12 @@ const StepPhone = ({ changeStep }) => {
                     >
                         <span className='mr-4 text-lg font-medium'>Finish</span>
                         <BsArrowRightCircle size='1.5rem' />
+                    </button>
+                    <button
+                        className=' absolute bottom-5 left-5 text-yellow-100 '
+                        onClick={backStep}
+                    >
+                        <BsArrowLeftCircle size='1.5rem' />
                     </button>
                 </Card>
             </div>

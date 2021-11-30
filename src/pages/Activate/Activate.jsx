@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import { logout } from '../../http';
-import { useDispatch } from 'react-redux';
-import { setAuth } from '../../store/authSlice';
 import StepName from './Steps/StepName/StepName';
 import StepAvatar from './Steps/StepAvatar/StepAvatar';
 import StepLinks from './Steps/StepLinks/StepLinks';
@@ -13,16 +10,15 @@ const steps = {
     4: StepPhone,
 };
 const Activate = () => {
-    const dispatch = useDispatch();
-    const onLogout = async () => {
-        await logout();
-        dispatch(setAuth(null));
-    };
     const [step, setStep] = useState(1);
     const Step = steps[step];
     return (
         <>
-            <Step changeStep={() => setStep(step + 1)} />
+            <Step
+                changeStep={() => setStep(step + 1)}
+                backStep={() => setStep(step - 1)}
+                step={step}
+            />
         </>
     );
 };

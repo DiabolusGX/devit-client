@@ -7,7 +7,7 @@ const initialState = {
         github: '',
         linkedin: '',
     },
-    phone: '',
+    phoneNumber: '',
     bio: '',
     gender: '',
 };
@@ -27,8 +27,8 @@ export const activateSlice = createSlice({
             state.links.linkedin = action.payload.linkedin;
         },
         setPersonalInfo: (state, action) => {
-            const { phone, bio, gender } = action.payload;
-            state.phone = phone;
+            const { phoneNumber, bio, gender } = action.payload;
+            state.phoneNumber = phoneNumber;
             state.bio = bio;
             state.gender = gender;
         },

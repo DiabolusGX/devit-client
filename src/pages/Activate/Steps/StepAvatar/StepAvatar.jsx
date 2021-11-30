@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { BsArrowRightCircle, BsArrowRightShort } from 'react-icons/bs';
+import {
+    BsArrowRightCircle,
+    BsArrowLeftCircle,
+    BsArrowRightShort,
+} from 'react-icons/bs';
 import { useSelector, useDispatch } from 'react-redux';
 import { Card, ImgCard } from '../../../../components';
 import { setAvatar } from '../../../../store/activateSlice';
-const StepAvatar = ({ changeStep }) => {
+const StepAvatar = ({ changeStep, backStep }) => {
     const { username } = useSelector((state) => state.activate);
 
     const dispatch = useDispatch();
@@ -22,14 +26,14 @@ const StepAvatar = ({ changeStep }) => {
     };
 
     return (
-        <div className='relative'>
+        <div>
             <div className='mb-8'>
                 <ImgCard
                     heading='Welcome to Devit!'
                     subheading='Follow the following steps to get activated.'
                 />
             </div>
-            <div>
+            <div className='relative'>
                 <Card
                     heading={`What a nice name, ${username}!`}
                     imgPath='./images/bird.svg'
@@ -61,6 +65,12 @@ const StepAvatar = ({ changeStep }) => {
                     >
                         <span className='mr-4 text-lg font-medium'>Next</span>
                         <BsArrowRightCircle size='1.5rem' />
+                    </button>
+                    <button
+                        className=' absolute bottom-5 left-5 text-yellow-100 '
+                        onClick={backStep}
+                    >
+                        <BsArrowLeftCircle size='1.5rem' />
                     </button>
                 </Card>
             </div>
