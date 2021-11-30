@@ -13,7 +13,7 @@ export const getAuthorizedUser = () => {
     return api.get('/auth/check');
 };
 export const activate = (data) => {
-    return api.post('/api/activate', data);
+    return api.post('/api/v1/user/activate', data);
 };
 export const logout = () => {
     return api.post('/auth/logout');

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const Home = () => {
     const { isAuth } = useSelector((state) => state.auth);
     return (
-        <div id='home' className='text-grey-100 pt-6 relative'>
+        <div id='home' className='text-grey-100 relative'>
             <img
                 className='absolute w-20 -top-24 left-2/4'
                 src='/images/lamp.png'
@@ -15,7 +15,7 @@ const Home = () => {
             {/* -------------Bannner------------- */}
             <div
                 id='banner'
-                className='flex items-center justify-between mb-12 px-20'
+                className='height_minus_nav_og_global flex items-center justify-between mb-12 px-20 -mt-3 '
             >
                 <div id='banner-left' className='w-1/2'>
                     <h1 className='gradient_text_og_global font-extrabold text-6xl leading-tight mb-8'>
@@ -28,7 +28,7 @@ const Home = () => {
                     </p>
                     <Link
                         to='/authenticate'
-                        className='bg-red-100 text-white-100 py-3 px-10 rounded inline-block mb-6 transition-all hover:bg-red-200 relative'
+                        className='bg-red-100 text-white-100 py-3 px-10 rounded inline-block mb-4 transition-all hover:bg-red-200 relative'
                     >
                         {isAuth
                             ? 'Go to your dashboard'

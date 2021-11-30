@@ -23,3 +23,27 @@ body {
 .gradient_og_global {
     background-image: linear-gradient(135deg, #93c497 5%, #e06068 60%);
 }
+.purple_gradient_og_global {
+    background: linear-gradient(102deg, #4d5fff -8.01%, #e0565f 100.32%);
+    box-shadow: 0px 8px 12px rgba(102, 93, 227, 0.2);
+}
+.height_minus_nav_og_global {
+    min-height: calc(100vh - 88px);
+}
+.heading_og_global {
+    position: relative;
+    font-size: 24px;
+    display: inline-block;
+    font-weight: 500;
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        height: 7px;
+        width: 120%;
+        border-radius: 20px;
+        background: linear-gradient(40deg, #ffdfa7, #e0565f);
+        box-shadow: 0px 2px 4px rgba(224, 86, 95, 0.2);
+    }
+}

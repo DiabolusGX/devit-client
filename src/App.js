@@ -1,6 +1,14 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Loader, Navbar } from './components';
-import { Activate, Authenticate, Dashboard, Home } from './pages';
+import {
+    Activate,
+    Authenticate,
+    Dashboard,
+    Explore,
+    Feed,
+    Home,
+    Rooms,
+} from './pages';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAuthorizedUser } from './http';
@@ -39,6 +47,18 @@ function App() {
                     path='/dashboard'
                     element={<ProtectedRoute component={<Dashboard />} />}
                 />
+                <Route
+                    path='/tech-rooms'
+                    element={<ProtectedRoute component={<Rooms />} />}
+                />
+                <Route
+                    path='/feed'
+                    element={<ProtectedRoute component={<Feed />} />}
+                />
+                <Route
+                    path='/explore'
+                    element={<ProtectedRoute component={<Explore />} />}
+                />
             </Routes>
         </>
     );
@@ -56,7 +76,7 @@ const SemiProtectedRoute = ({ component }) => {
     ) : isAuth && !user.isActivated ? (
         component
     ) : (
-        <Navigate replace to='/rooms' />
+        <Navigate replace to='/dashboard' />
     );
 };
 const ProtectedRoute = ({ component }) => {
