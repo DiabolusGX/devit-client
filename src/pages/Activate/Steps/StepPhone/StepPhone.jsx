@@ -38,9 +38,7 @@ const StepPhone = ({ step, backStep }) => {
                     setLoading(true);
                     try {
                         const { data } = await activate(activateState);
-                        if (data.bio) {
-                            dispatch(setAuth(data));
-                        }
+                        dispatch(setAuth(data));
                     } catch (err) {
                         console.log(err);
                     } finally {

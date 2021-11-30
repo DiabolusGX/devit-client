@@ -43,7 +43,7 @@ const TestimonialSlider = () => {
                     </div>
                     <p className='text-grey-200 leading-normal text-lg'>
                         “Students are competitive creature, they want to learn
-                        together, share there success, even the slightest one.
+                        together, share their success, even the slightest one.
                         All they need is a platform where they can share with
                         their peers and show case their skills as well and that
                         is Devit.”
