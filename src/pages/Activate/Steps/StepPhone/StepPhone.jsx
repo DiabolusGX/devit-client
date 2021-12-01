@@ -8,6 +8,7 @@ import {
     Loader,
     TextInput,
 } from '../../../../components';
+import { Bounce, toast } from 'react-toastify';
 import { setAuth } from '../.././../../store/authSlice';
 import { setPersonalInfo } from '../../../../store/activateSlice';
 import { activate } from '../../../../http';
@@ -48,6 +49,20 @@ const StepPhone = ({ step, backStep }) => {
         }
     }, [dispatch, activateState, step]);
     const submit = async () => {
+        if (!userInfo.phoneNumber || !userInfo.bio || !userInfo.gender) {
+            return toast.error('All fields are mandatory!', {
+                transition: Bounce,
+                autoClose: 5000,
+                theme: 'dark',
+            });
+        }
+        if (userInfo.phoneNumber.length !== 10) {
+            return toast.info('Phone no must have 10 digits', {
+                transition: Bounce,
+                autoClose: 5000,
+                theme: 'dark',
+            });
+        }
         dispatch(setPersonalInfo(userInfo));
     };
 

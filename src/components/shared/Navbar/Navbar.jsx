@@ -47,7 +47,11 @@ const Navbar = () => {
                         <IoNotificationsOutline size='1.5rem' />
                     </button>
                     <button className='text-lg ml-6 border-2 border-yellow-100 rounded-full'>
-                        <img className='w-8 ' src='/images/abhay.png' alt='' />
+                        <img
+                            className='w-8 h-8 rounded-full '
+                            src={user.avatar}
+                            alt=''
+                        />
                     </button>
                     <button
                         onClick={onLogout}
