@@ -16,6 +16,7 @@ import { setAuth } from './store/authSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
+import Profile from './pages/Profile/Profile';
 
 function App() {
     const location = useLocation();
@@ -29,7 +30,7 @@ function App() {
             setLoading(false);
         };
         fetchUser();
-    }, []);
+    }, [dispatch]);
     if (loading) return <Loader message='Fetching data..' />;
     return (
         <>
@@ -60,6 +61,10 @@ function App() {
                 <Route
                     path='/explore'
                     element={<ProtectedRoute component={<Explore />} />}
+                />
+                <Route
+                    path='/profile/:id'
+                    element={<ProtectedRoute component={<Profile />} />}
                 />
             </Routes>
             <ToastContainer />

@@ -1,7 +1,4 @@
 import React from 'react';
-import { logout } from '../../http';
-import { useDispatch } from 'react-redux';
-import { setAuth } from '../../store/authSlice';
 import { useNavigate } from 'react-router';
 import {
     FeatureCard,
@@ -12,11 +9,7 @@ import { GiProcessor, GiCompass, GiThunderball } from 'react-icons/gi';
 import { CgFeed } from 'react-icons/cg';
 const Dashboard = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const onLogout = async () => {
-        await logout();
-        dispatch(setAuth(null));
-    };
+
     return (
         <div
             id='dashboard'

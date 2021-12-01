@@ -46,13 +46,16 @@ const Navbar = () => {
                     <button className='text-green-100 p-1 border-2 border-green-100 rounded-full hover:bg-green-10 '>
                         <IoNotificationsOutline size='1.5rem' />
                     </button>
-                    <button className='text-lg ml-6 border-2 border-yellow-100 rounded-full'>
+                    <Link
+                        to='/profile/1'
+                        className='text-lg ml-6 border-2 border-yellow-100 rounded-full'
+                    >
                         <img
                             className='w-8 h-8 rounded-full '
                             src={user.avatar}
                             alt=''
                         />
-                    </button>
+                    </Link>
                     <button
                         onClick={onLogout}
                         className='text-lg text-red-100 ml-6 p-1 border-2 border-red-100 rounded-full hover:bg-red-10'
