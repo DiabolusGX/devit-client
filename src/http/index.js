@@ -12,12 +12,17 @@ const api = axios.create({
 export const getAuthorizedUser = () => {
     return api.get('/auth/check');
 };
+export const checkUsername = (data) => {
+    return api.post('/api/v1/user/check-username', data);
+};
 export const activate = (data) => {
     return api.post('/api/v1/user/activate', data);
 };
+
 export const logout = () => {
     return api.post('/auth/logout');
 };
+
 // export const getAllRooms = () => {
 //     return api.get('/api/rooms');
 // };

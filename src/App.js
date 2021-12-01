@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAuthorizedUser } from './http';
 import { setAuth } from './store/authSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 
 function App() {
@@ -60,6 +62,7 @@ function App() {
                     element={<ProtectedRoute component={<Explore />} />}
                 />
             </Routes>
+            <ToastContainer />
         </>
     );
 }

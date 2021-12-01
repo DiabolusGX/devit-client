@@ -9,9 +9,9 @@ import { Card, ImgCard } from '../../../../components';
 import { setAvatar } from '../../../../store/activateSlice';
 const StepAvatar = ({ changeStep, backStep }) => {
     const { username } = useSelector((state) => state.activate);
-
+    const { user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
-    const [image, setImage] = useState('/images/abhay.png');
+    const [image, setImage] = useState(user.avatar);
     const captureImage = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -42,7 +42,11 @@ const StepAvatar = ({ changeStep, backStep }) => {
                         How's this one?
                     </p>
 
-                    <img className='img_og mb-4' src={image} alt='avatar' />
+                    <img
+                        className='mb-4 w-16 h-16 border-2 border-yellow-100 rounded-full'
+                        src={image}
+                        alt='avatar'
+                    />
                     <div>
                         <input
                             onChange={captureImage}
