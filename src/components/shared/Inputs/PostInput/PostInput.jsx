@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { OutlinedButton } from '../../..';
+import { OutlinedButton, PrimaryButton, SecondaryButton } from '../../..';
 import { BsCardImage } from 'react-icons/bs';
 const PostInput = () => {
     const { user } = useSelector((state) => state.auth);
@@ -20,9 +20,9 @@ const PostInput = () => {
             </div>
             <hr className='text-grey-200 border-dashed my-4  ' />
             <div className='flex items-center justify-between'>
-                <OutlinedButton>
+                <SecondaryButton>
                     <span className='px-2'>Share</span>
-                </OutlinedButton>
+                </SecondaryButton>
                 <OutlinedButton circular>
                     <BsCardImage size='1.3rem' />
                 </OutlinedButton>

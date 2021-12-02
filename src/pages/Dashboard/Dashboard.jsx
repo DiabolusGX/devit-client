@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import {
     FeatureCard,
     InformationCard,
@@ -9,7 +9,11 @@ import { GiProcessor, GiCompass, GiThunderball } from 'react-icons/gi';
 import { CgFeed } from 'react-icons/cg';
 const Dashboard = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
+    useEffect(() => {
+        localStorage.setItem('currentPath', location.pathname);
+    }, []);
     return (
         <div
             id='dashboard'

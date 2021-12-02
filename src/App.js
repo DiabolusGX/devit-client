@@ -21,6 +21,8 @@ import Profile from './pages/Profile/Profile';
 function App() {
     const location = useLocation();
     const dispatch = useDispatch();
+    const { currentPath } = useSelector((state) => state.auth);
+    console.log(currentPath);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchUser = async () => {
@@ -73,8 +75,11 @@ function App() {
 }
 const GuestRoute = ({ component }) => {
     const { isAuth } = useSelector((state) => state.auth);
-
-    return isAuth ? <Navigate replace to='/dashboard' /> : component;
+    let currentPath = localStorage.getItem('currentPath');
+    if (!currentPath) {
+        currentPath = '/dashboard';
+    }
+    return isAuth ? <Navigate to={currentPath} /> : component;
 };
 const SemiProtectedRoute = ({ component }) => {
     const { isAuth, user } = useSelector((state) => state.auth);
