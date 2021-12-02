@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
     BsFillPeopleFill,
     BsLinkedin,
@@ -7,11 +8,16 @@ import {
     BsGenderMale,
 } from 'react-icons/bs';
 import { GiStarMedal, GiProcessor } from 'react-icons/gi';
-import { AiFillEdit } from 'react-icons/ai';
 import PostInput from '../../components/shared/Inputs/PostInput/PostInput';
-import { Post } from '../../components';
+import { Post, ProfileEditCard } from '../../components';
 const Profile = () => {
     const [page, setPage] = useState('Profile');
+    const location = useLocation();
+
+    useEffect(() => {
+        localStorage.setItem('currentPath', location.pathname);
+    }, []);
+
     const optionHandler = (e) => {
         setPage(e.target.name);
     };
@@ -69,13 +75,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='w-full py-3 px-5 rounded-2xl bg-black-200'>
-                        <div className='flex items-center justify-between mb-2'>
-                            <h3 className='text-lg font-medium'>Status</h3>
-                            <button className='text-grey-200'>
-                                <AiFillEdit size='1.3rem' />
-                            </button>
-                        </div>
+                    <ProfileEditCard light heading='Status'>
                         <div className='mb-2 text-grey-200'>
                             <h4 className='text-red-100 text-base mb-2 font-medium'>
                                 Mastering
@@ -96,7 +96,7 @@ const Profile = () => {
                             </h4>
                             <p className='text-sm mb-1 font-medium'>NextJs</p>
                         </div>
-                    </div>
+                    </ProfileEditCard>
                 </div>
                 <div
                     id='p-right'
@@ -106,8 +106,8 @@ const Profile = () => {
                         <div className='relative w-full h-52'>
                             <img
                                 className='w-full h-full rounded-2xl object-cover'
-                                // src='/images/optimistic.png'
-                                src='https://images.unsplash.com/photo-1637867833022-ea5730935fb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=849&q=80'
+                                src='/images/optimistic.png'
+                                // src='https://images.unsplash.com/photo-1637867833022-ea5730935fb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=849&q=80'
                                 alt='bg-pic'
                             />
                             <div className='absolute flex items-end top-3/4 left-20'>
@@ -149,8 +149,19 @@ const Profile = () => {
                             </button>
                             <button
                                 onClick={optionHandler}
-                                name='Github'
+                                name='Friend Requests'
                                 className={`mr-16  font-medium ${
+                                    page === 'Friend Requests'
+                                        ? 'text-grey-100 border-b-2'
+                                        : 'text-grey-200'
+                                }`}
+                            >
+                                Friend Requests
+                            </button>
+                            <button
+                                onClick={optionHandler}
+                                name='Github'
+                                className={` font-medium ${
                                     page === 'Github'
                                         ? 'text-grey-100 border-b-2'
                                         : 'text-grey-200'
@@ -158,89 +169,107 @@ const Profile = () => {
                             >
                                 Github
                             </button>
-                            <button
-                                onClick={optionHandler}
-                                name='Projects'
-                                className={` font-medium ${
-                                    page === 'Projects'
-                                        ? 'text-grey-100 border-b-2'
-                                        : 'text-grey-200'
-                                }`}
-                            >
-                                Projects
-                            </button>
                         </div>
                     </div>
-
-                    <div className='flex justify-between'>
-                        <div className='w-3/5'>
-                            {page === 'Profile' ? (
-                                <div>
-                                    <div className='mb-8'>
-                                        <PostInput />
+                    {page === 'Profile' ? (
+                        <div>
+                            <div className='flex justify-between'>
+                                <div className='w-3/5'>
+                                    <div>
+                                        <div className='mb-8'>
+                                            <PostInput />
+                                        </div>
+                                        <Post />
                                     </div>
-                                    <Post />
                                 </div>
-                            ) : page === 'Github' ? (
-                                <div>Github</div>
-                            ) : page === 'Friends' ? (
-                                <div>Friends</div>
-                            ) : (
-                                <div>Projects</div>
-                            )}
-                        </div>
-                        <div className='w-1/3'>
-                            <div className='w-full py-4 px-5 rounded-2xl bg-black-400'>
-                                <div className='flex items-center justify-between mb-2'>
-                                    <h3 className='text-lg font-medium'>
-                                        About
-                                    </h3>
-                                    <button className='text-grey-200'>
-                                        <AiFillEdit size='1.3rem' />
-                                    </button>
-                                </div>
-                                <p className='text-sm text-grey-200'>
-                                    Laboris non ad et aute sint aliquip mollit
-                                    voluptate velit dolore magna fugiat ex.
-                                    Commodo amet veniam nostrud mollit quis sint
-                                    qui nulla elit esse excepteur.
-                                </p>
-                                <hr className='my-6 border-dashed text-grey-200' />
-                                <div>
-                                    <div className='text-blue-200 flex mb-3'>
-                                        <BsLinkedin size='1.3rem' />
-                                        <a
-                                            className='text-sm ml-4 text-grey-200'
-                                            href='https://linkedin.com/abhay'
-                                        >
-                                            https://linkedin.com/abhay
-                                        </a>
+                                <div className='w-1/3'>
+                                    <div className='mb-4'>
+                                        <ProfileEditCard heading='About'>
+                                            <p className='text-sm text-grey-200'>
+                                                Laboris non ad et aute sint
+                                                aliquip mollit voluptate velit
+                                                dolore magna fugiat ex. Commodo
+                                                amet veniam nostrud mollit quis
+                                                sint qui nulla elit esse
+                                                excepteur.
+                                            </p>
+                                            <hr className='my-6 border-dashed text-grey-200' />
+                                            <div>
+                                                <div className='text-blue-200 flex mb-3'>
+                                                    <BsLinkedin size='1.3rem' />
+                                                    <a
+                                                        className='text-sm ml-4 text-grey-200'
+                                                        href='https://linkedin.com/abhay'
+                                                    >
+                                                        https://linkedin.com/abhay
+                                                    </a>
+                                                </div>
+                                                <div className='text-red-100 flex mb-3'>
+                                                    <BsGithub size='1.3rem' />
+                                                    <a
+                                                        className='text-sm ml-4 text-grey-200'
+                                                        href='https://github.com/abhay'
+                                                    >
+                                                        https://github.com/abhay
+                                                    </a>
+                                                </div>
+                                                <div className='text-green-100 flex mb-3'>
+                                                    <BsFillTelephoneFill size='1.2rem' />
+                                                    <p className='text-sm ml-4 text-grey-200'>
+                                                        7905809434
+                                                    </p>
+                                                </div>
+                                                <div className='text-yellow-100 flex mb-3'>
+                                                    <BsGenderMale size='1.2rem' />
+                                                    <p className='text-sm ml-4 text-grey-200'>
+                                                        Male
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </ProfileEditCard>
                                     </div>
-                                    <div className='text-red-100 flex mb-3'>
-                                        <BsGithub size='1.3rem' />
-                                        <a
-                                            className='text-sm ml-4 text-grey-200'
-                                            href='https://github.com/abhay'
-                                        >
-                                            https://github.com/abhay
-                                        </a>
-                                    </div>
-                                    <div className='text-green-100 flex mb-3'>
-                                        <BsFillTelephoneFill size='1.2rem' />
-                                        <p className='text-sm ml-4 text-grey-200'>
-                                            7905809434
-                                        </p>
-                                    </div>
-                                    <div className='text-yellow-100 flex mb-3'>
-                                        <BsGenderMale size='1.2rem' />
-                                        <p className='text-sm ml-4 text-grey-200'>
-                                            Male
-                                        </p>
+                                    <div>
+                                        <ProfileEditCard heading='Experience'>
+                                            <div className='mb-2'>
+                                                <h3
+                                                    id='role'
+                                                    className='text-yellow-100 font-medium'
+                                                >
+                                                    React Developer
+                                                </h3>
+                                                <h5
+                                                    id='company'
+                                                    className='text-grey-200'
+                                                >
+                                                    Bajaj Finserv Health
+                                                </h5>
+                                            </div>
+                                            <div className='mb-2'>
+                                                <h3
+                                                    id='role'
+                                                    className='text-yellow-100 font-medium'
+                                                >
+                                                    MERN Developer
+                                                </h3>
+                                                <h5
+                                                    id='company'
+                                                    className='text-grey-200'
+                                                >
+                                                    Applore Technologies
+                                                </h5>
+                                            </div>
+                                        </ProfileEditCard>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    ) : page === 'Github' ? (
+                        <div>Github</div>
+                    ) : page === 'Friends' ? (
+                        <div>Friends</div>
+                    ) : (
+                        <div>Friend Requests</div>
+                    )}
                 </div>
             </div>
         </div>

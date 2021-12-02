@@ -27,7 +27,7 @@ const Home = () => {
                         developers in your area.
                     </p>
                     <Link
-                        to='/authenticate'
+                        to='/dashboard'
                         className='bg-red-100 text-white-100 py-3 px-10 rounded inline-block mb-4 transition-all hover:bg-red-200 relative'
                     >
                         {isAuth

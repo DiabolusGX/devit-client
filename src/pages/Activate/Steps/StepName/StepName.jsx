@@ -30,6 +30,7 @@ const StepName = ({ changeStep }) => {
             return toast.error('🐱‍🚀 User name is mandatory!', {
                 transition: Bounce,
                 autoClose: 5000,
+                theme: 'dark',
             });
         }
         if (!usernameIsValid)

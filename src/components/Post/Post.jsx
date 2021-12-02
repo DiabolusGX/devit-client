@@ -1,3 +1,5 @@
+import { CommentInput } from '..';
+
 const Post = () => {
     return (
         <div className='bg-black-400 rounded-2xl py-3 px-5'>
@@ -12,17 +14,20 @@ const Post = () => {
                     <p className='text-xs text-grey-200'>22 mins ago</p>
                 </div>
             </div>
-            <div>
-                <p className='text-sm text-grey-200 mb-4'>
-                    Fusce blandit est nec nisi iaculis dictum. Phasellus dapibus
-                    faucibus sem id vehicula. Maecenas in condimentum dolor,
-                    vitae volutpat metus.
+            <div className='mb-4'>
+                <p className='text-base text-grey-200 mb-2'>
+                    We owe a lot to our volunteers! Like many charities, our
+                    volunteers are crucial to Sea Smart’s continued growth and
+                    widespread impact.
                 </p>
                 <img
                     className='w-full h-48 rounded-xl object-cover'
                     src='https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
                     alt=''
                 />
+            </div>
+            <div>
+                <CommentInput />
             </div>
         </div>
     );

@@ -10,6 +10,7 @@ const Navbar = () => {
     const { isAuth, user } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const onLogout = async () => {
+        localStorage.clear();
         await logout();
         dispatch(setAuth(null));
     };

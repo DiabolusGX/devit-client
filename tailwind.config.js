@@ -29,7 +29,7 @@ module.exports = {
                 100: '#93C497',
             },
             yellow: {
-                100: '#FFDFA7',
+                100: '#FFE6BB',
                 200: '#E5A024',
             },
             blue: {
