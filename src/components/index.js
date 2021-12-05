@@ -15,3 +15,5 @@ export { default as TextArea } from './shared/Inputs/TextArea/TextArea';
 export { default as PostInput } from './shared/Inputs/PostInput/PostInput';
 export { default as CommentInput } from './shared/Inputs/CommentInput/CommentInput';
 export { default as Post } from './Post/Post';
+export { default as Modal } from './shared/Modal/Modal';
+export { default as AboutModal } from './AboutModal/AboutModal';
