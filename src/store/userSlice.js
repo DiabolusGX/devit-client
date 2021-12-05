@@ -1,25 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    name: '',
-    username: '',
-    email: '',
-    avatar: '',
-    wall: '',
-    friends: [],
-    friendRequests: [],
-    batch: '',
-    rooms: [], //with his/her status in it
-    bio: '',
-    links: {
-        linkedin: '',
-        github: '',
-    },
-    phone: '',
-    gender: '',
-    experience: [], //array of objects contains role and company name
-    posts: [],
-    repos: [],
+    user: null,
 };
 
 export const userSlice = createSlice({
@@ -27,8 +9,7 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         setBasicUserData: (state, action) => {
-            const user = action.payload;
-            state.user = user;
+            state.user = action.payload;
         },
     },
 });

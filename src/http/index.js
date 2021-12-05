@@ -18,7 +18,15 @@ export const checkUsername = (data) => {
 export const activate = (data) => {
     return api.post('/api/v1/user/activate', data);
 };
-
+export const getUserProfile = () => {
+    return api.get('/api/v1/user/profile');
+};
+export const getAllPosts = () => {
+    return api.get('/api/v1/posts/all');
+};
+export const getAllPostsOfUser = (userId) => {
+    return api.get(`/api/v1/posts/all?${userId}`);
+};
 export const logout = () => {
     return api.post('/auth/logout');
 };

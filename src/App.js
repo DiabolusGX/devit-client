@@ -21,8 +21,7 @@ import Profile from './pages/Profile/Profile';
 function App() {
     const location = useLocation();
     const dispatch = useDispatch();
-    const { currentPath } = useSelector((state) => state.auth);
-    console.log(currentPath);
+
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         const fetchUser = async () => {
