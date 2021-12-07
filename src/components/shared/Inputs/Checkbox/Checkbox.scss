@@ -1,0 +1,28 @@
+.agree_checkbox + label {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: #323232;
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #ffe6bb;
+}
+.agree_checkbox + label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #323232;
+    border-radius: 50%;
+}
+.agree_checkbox {
+    &.is_checked + label {
+        &::before {
+            background-color: #ffe6bb;
+        }
+    }
+}

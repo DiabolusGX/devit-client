@@ -14,6 +14,8 @@ export { default as TextInput } from './shared/Inputs/TextInput/TextInput';
 export { default as TextArea } from './shared/Inputs/TextArea/TextArea';
 export { default as PostInput } from './shared/Inputs/PostInput/PostInput';
 export { default as CommentInput } from './shared/Inputs/CommentInput/CommentInput';
+export { default as Checkbox } from './shared/Inputs/Checkbox/Checkbox';
 export { default as Post } from './Post/Post';
 export { default as Modal } from './shared/Modal/Modal';
 export { default as AboutModal } from './AboutModal/AboutModal';
+export { default as ExperienceModal } from './ExperienceModal/ExperienceModal';

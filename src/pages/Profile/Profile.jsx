@@ -12,16 +12,26 @@ import { MdOutlineHouseSiding } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { GiStarMedal, GiProcessor } from 'react-icons/gi';
 import PostInput from '../../components/shared/Inputs/PostInput/PostInput';
-import { AboutModal, Post, ProfileEditCard } from '../../components';
+import {
+    AboutModal,
+    ExperienceModal,
+    Post,
+    ProfileEditCard,
+} from '../../components';
 import { getUserProfile } from '../../http';
 import { setBasicUserData } from '../../store/userSlice';
+
 const Profile = () => {
     const dispatch = useDispatch();
+    //fetching data from the user
     const { user } = useSelector((state) => state.user);
-
+    //for differnt sections ---> such as Profile, Friends, Github etc
     const [page, setPage] = useState('Profile');
     const location = useLocation();
+
+    //Modal states
     const [showAboutModal, setShowAboutModal] = useState(false);
+    const [showExperienceModal, setShowExperienceModal] = useState(false);
 
     //for reload problem
     useEffect(() => {
@@ -35,6 +45,9 @@ const Profile = () => {
 
     const editAbout = () => {
         setShowAboutModal(true);
+    };
+    const addExperiences = () => {
+        setShowExperienceModal(true);
     };
     const optionHandler = (e) => {
         setPage(e.target.name);
@@ -305,7 +318,10 @@ const Profile = () => {
                                         </div>
                                         <div>
                                             {user?.experiences ? (
-                                                <ProfileEditCard heading='Experience'>
+                                                <ProfileEditCard
+                                                    onClick={addExperiences}
+                                                    heading='Experience'
+                                                >
                                                     {user?.experiences.map(
                                                         (experience) => (
                                                             <div
@@ -319,23 +335,57 @@ const Profile = () => {
                                                                     className='text-yellow-100 font-medium'
                                                                 >
                                                                     {
-                                                                        experience?.title
+                                                                        experience?.role
                                                                     }
                                                                 </h3>
                                                                 <h5
                                                                     id='company'
-                                                                    className='text-grey-200'
+                                                                    className='text-grey-100'
                                                                 >
                                                                     {
                                                                         experience?.company
                                                                     }
                                                                 </h5>
+                                                                <div className='flex items-center'>
+                                                                    <h5
+                                                                        id='joiningDate'
+                                                                        className='text-sm text-grey-200 '
+                                                                    >
+                                                                        {
+                                                                            experience
+                                                                                ?.dates
+                                                                                ?.joining
+                                                                        }
+                                                                    </h5>
+                                                                    <h5 className='text-sm text-grey-200 mx-2'>
+                                                                        to
+                                                                    </h5>
+                                                                    {experience.currentlyWorking ? (
+                                                                        <h5 className='text-sm text-grey-200'>
+                                                                            Current
+                                                                        </h5>
+                                                                    ) : (
+                                                                        <h5
+                                                                            id='leaving date'
+                                                                            className='text-sm text-grey-200'
+                                                                        >
+                                                                            {
+                                                                                experience
+                                                                                    ?.dates
+                                                                                    ?.leaving
+                                                                            }
+                                                                        </h5>
+                                                                    )}
+                                                                </div>
                                                             </div>
                                                         )
                                                     )}
                                                 </ProfileEditCard>
                                             ) : (
-                                                <ProfileEditCard heading='Add experience'></ProfileEditCard>
+                                                <ProfileEditCard
+                                                    onClick={addExperiences}
+                                                    heading='Add experience'
+                                                ></ProfileEditCard>
                                             )}
                                         </div>
                                     </div>
@@ -353,6 +403,11 @@ const Profile = () => {
             </div>
             {showAboutModal && (
                 <AboutModal onClose={() => setShowAboutModal(false)} />
+            )}
+            {showExperienceModal && (
+                <ExperienceModal
+                    onClose={() => setShowExperienceModal(false)}
+                />
             )}
         </>
     );
