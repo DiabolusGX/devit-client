@@ -18,4 +18,6 @@ export { default as Checkbox } from './shared/Inputs/Checkbox/Checkbox';
 export { default as Post } from './Post/Post';
 export { default as Modal } from './shared/Modal/Modal';
 export { default as AboutModal } from './AboutModal/AboutModal';
+export { default as LevelModal } from './LevelModal/LevelModal';
 export { default as ExperienceModal } from './ExperienceModal/ExperienceModal';
+export { default as Dropdown } from './shared/Dropdown/Dropdown';

@@ -8,6 +8,7 @@ import { setAuth } from '../../../store/authSlice';
 import { logout } from '../../../http';
 const Navbar = () => {
     const { isAuth, user } = useSelector((state) => state.auth);
+
     const dispatch = useDispatch();
     const onLogout = async () => {
         localStorage.clear();
@@ -53,8 +54,8 @@ const Navbar = () => {
                     >
                         <img
                             className='w-8 h-8 rounded-full '
-                            src={user.avatar}
-                            alt=''
+                            src={user?.avatar}
+                            alt='avatar'
                         />
                     </Link>
                     <button
