@@ -2,7 +2,7 @@ import React from 'react';
 import './Loader.scss';
 const Loader = ({ message }) => {
     return (
-        <div className='flex justify-center items-center w-screen h-screen'>
+        <div className='flex justify-center items-center w-screen h-screen overflow-x-hidden'>
             <div className='bg-black-200 rounded-2xl px-8 py-4 text-center flex flex-col items-center'>
                 <div className='flex flex-col items-center'>
                     <svg

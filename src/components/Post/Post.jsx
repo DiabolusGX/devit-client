@@ -15,7 +15,7 @@ const Post = () => {
                 </div>
             </div>
             <div className='mb-4'>
-                <p className='text-base text-grey-200 mb-2'>
+                <p className='text-sm text-grey-200 mb-2'>
                     We owe a lot to our volunteers! Like many charities, our
                     volunteers are crucial to Sea Smart’s continued growth and
                     widespread impact.

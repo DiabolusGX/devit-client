@@ -15,6 +15,8 @@ import PostInput from '../../components/shared/Inputs/PostInput/PostInput';
 import {
     AboutModal,
     ExperienceModal,
+    LevelModal,
+    Loader,
     Post,
     ProfileEditCard,
 } from '../../components';
@@ -32,6 +34,7 @@ const Profile = () => {
     //Modal states
     const [showAboutModal, setShowAboutModal] = useState(false);
     const [showExperienceModal, setShowExperienceModal] = useState(false);
+    const [showLevelModal, setShowLevelModal] = useState(false);
 
     //for reload problem
     useEffect(() => {
@@ -43,16 +46,22 @@ const Profile = () => {
         fetchUser();
     }, []);
 
+    //action functions for opening the modals
     const editAbout = () => {
         setShowAboutModal(true);
     };
     const addExperiences = () => {
         setShowExperienceModal(true);
     };
+    const editLevel = () => {
+        setShowLevelModal(true);
+    };
+
+    //selecting the section to show
     const optionHandler = (e) => {
         setPage(e.target.name);
     };
-
+    if (!user?.avatar) return <Loader message='Loading' />;
     return (
         <>
             <div
@@ -111,7 +120,11 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        <ProfileEditCard light heading='Status'>
+                        <ProfileEditCard
+                            onClick={editLevel}
+                            light
+                            heading='Status'
+                        >
                             <div className='mb-2 text-grey-200'>
                                 <h4 className='text-red-100 text-base mb-2 font-medium'>
                                     Mastering
@@ -408,6 +421,9 @@ const Profile = () => {
                 <ExperienceModal
                     onClose={() => setShowExperienceModal(false)}
                 />
+            )}
+            {showLevelModal && (
+                <LevelModal onClose={() => setShowLevelModal(false)} />
             )}
         </>
     );
