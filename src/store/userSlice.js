@@ -33,9 +33,17 @@ export const userSlice = createSlice({
                 state.user.experiences = [newExperience];
             }
         },
+        editNamePhotoInfo: (state, action) => {
+            const { name, username, avatar, banner } = action.payload;
+            state.user = { ...state.user, name, username, avatar, banner };
+        },
     },
 });
-export const { setBasicUserData, editAboutInfo, addExperienceInfo } =
-    userSlice.actions;
+export const {
+    setBasicUserData,
+    editAboutInfo,
+    addExperienceInfo,
+    editNamePhotoInfo,
+} = userSlice.actions;
 
 export default userSlice.reducer;

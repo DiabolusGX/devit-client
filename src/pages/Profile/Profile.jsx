@@ -8,6 +8,7 @@ import {
     BsGenderMale,
     BsGenderFemale,
 } from 'react-icons/bs';
+import { AiFillEdit } from 'react-icons/ai';
 import { MdOutlineHouseSiding } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { GiStarMedal, GiProcessor } from 'react-icons/gi';
@@ -19,6 +20,7 @@ import {
     Loader,
     Post,
     ProfileEditCard,
+    ProfileNameModal,
 } from '../../components';
 import { getUserProfile } from '../../http';
 import { setBasicUserData } from '../../store/userSlice';
@@ -35,13 +37,16 @@ const Profile = () => {
     const [showAboutModal, setShowAboutModal] = useState(false);
     const [showExperienceModal, setShowExperienceModal] = useState(false);
     const [showLevelModal, setShowLevelModal] = useState(false);
+    const [showNameModal, setShowNameModal] = useState(false);
 
     //for reload problem
     useEffect(() => {
         localStorage.setItem('currentPath', location.pathname);
         const fetchUser = async () => {
             const { data } = await getUserProfile();
-            dispatch(setBasicUserData(data));
+            dispatch(
+                setBasicUserData({ ...data, banner: '/images/optimistic.png' })
+            );
         };
         fetchUser();
     }, []);
@@ -49,6 +54,9 @@ const Profile = () => {
     //action functions for opening the modals
     const editAbout = () => {
         setShowAboutModal(true);
+    };
+    const editName = () => {
+        setShowNameModal(true);
     };
     const addExperiences = () => {
         setShowExperienceModal(true);
@@ -61,7 +69,7 @@ const Profile = () => {
     const optionHandler = (e) => {
         setPage(e.target.name);
     };
-    if (!user?.avatar) return <Loader message='Loading' />;
+    if (!user) return <Loader message='Loading' />;
     return (
         <>
             <div
@@ -180,7 +188,8 @@ const Profile = () => {
                             <div className='relative w-full h-52'>
                                 <img
                                     className='w-full h-full rounded-2xl object-cover'
-                                    src='/images/optimistic.png'
+                                    // src='/images/optimistic.png'
+                                    src={user?.banner}
                                     // src='https://images.unsplash.com/photo-1637867833022-ea5730935fb4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=849&q=80'
                                     alt='bg-pic'
                                 />
@@ -238,13 +247,19 @@ const Profile = () => {
                                 <button
                                     onClick={optionHandler}
                                     name='Github'
-                                    className={` font-medium ${
+                                    className={`mr-16 font-medium ${
                                         page === 'Github'
                                             ? 'text-grey-100 border-b-2'
                                             : 'text-grey-200'
                                     }`}
                                 >
                                     Github
+                                </button>
+                                <button
+                                    onClick={editName}
+                                    className='text-grey-200'
+                                >
+                                    <AiFillEdit size='1.3rem' />
                                 </button>
                             </div>
                         </div>
@@ -415,15 +430,25 @@ const Profile = () => {
                 </div>
             </div>
             {showAboutModal && (
-                <AboutModal onClose={() => setShowAboutModal(false)} />
+                <AboutModal
+                    user={user}
+                    onClose={() => setShowAboutModal(false)}
+                />
             )}
             {showExperienceModal && (
                 <ExperienceModal
+                    user={user}
                     onClose={() => setShowExperienceModal(false)}
                 />
             )}
             {showLevelModal && (
                 <LevelModal onClose={() => setShowLevelModal(false)} />
+            )}
+            {showNameModal && (
+                <ProfileNameModal
+                    user={user}
+                    onClose={() => setShowNameModal(false)}
+                />
             )}
         </>
     );
