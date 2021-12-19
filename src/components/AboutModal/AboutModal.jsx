@@ -3,10 +3,8 @@ import { CheckButton, Modal, TextArea, TextInput } from '..';
 import { useSelector, useDispatch } from 'react-redux';
 import { editAboutInfo } from '../../store/userSlice';
 import { Bounce, toast } from 'react-toastify';
-const AboutModal = ({ onClose }) => {
+const AboutModal = ({ onClose, user }) => {
     const dispatch = useDispatch();
-    //fetch data from redux store
-    const { user } = useSelector((state) => state.user);
     const { links, bio, phone, gender, roomAddress } = user;
     //creating states for inputs
     const [userLinks, setUserLinks] = useState(links);

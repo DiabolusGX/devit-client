@@ -20,4 +20,5 @@ export { default as Modal } from './shared/Modal/Modal';
 export { default as AboutModal } from './AboutModal/AboutModal';
 export { default as LevelModal } from './LevelModal/LevelModal';
 export { default as ExperienceModal } from './ExperienceModal/ExperienceModal';
+export { default as ProfileNameModal } from './ProfileNameModal/ProfileNameModal';
 export { default as Dropdown } from './shared/Dropdown/Dropdown';

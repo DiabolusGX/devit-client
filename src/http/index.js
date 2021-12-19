@@ -31,6 +31,11 @@ export const logout = () => {
     return api.post('/auth/logout');
 };
 
+//edit endpoints
+export const editNamePhoto = (data) => {
+    return api.post('/api/v1/user/profile/edit/namePhoto', data);
+};
+
 // export const getAllRooms = () => {
 //     return api.get('/api/rooms');
 // };
