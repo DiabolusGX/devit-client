@@ -23,19 +23,20 @@ export const userSlice = createSlice({
             };
         },
         addExperienceInfo: (state, action) => {
-            const newExperience = action.payload;
-            if (state.user.experiences) {
-                state.user.experiences = [
-                    newExperience,
-                    ...state.user.experiences,
-                ];
-            } else {
-                state.user.experiences = [newExperience];
-            }
+            state.user.experiences = action.payload;
         },
-        editNamePhotoInfo: (state, action) => {
-            const { name, username, avatar, banner } = action.payload;
-            state.user = { ...state.user, name, username, avatar, banner };
+        removeExperienceInfo: (state, action) => {
+            state.user.experiences = action.payload;
+        },
+        editHeaderInfo: (state, action) => {
+            const { displayName, username, avatar, banner } = action.payload;
+            state.user = {
+                ...state.user,
+                displayName,
+                username,
+                avatar,
+                banner,
+            };
         },
     },
 });
@@ -43,7 +44,8 @@ export const {
     setBasicUserData,
     editAboutInfo,
     addExperienceInfo,
-    editNamePhotoInfo,
+    editHeaderInfo,
+    removeExperienceInfo,
 } = userSlice.actions;
 
 export default userSlice.reducer;

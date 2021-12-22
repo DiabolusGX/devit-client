@@ -9,7 +9,10 @@ const ProfileEditCard = ({ children, heading, light, onClick }) => {
         >
             <div className='flex items-center justify-between mb-2'>
                 <h3 className='text-lg font-medium'>{heading}</h3>
-                <button onClick={onClick} className='text-grey-200'>
+                <button
+                    onClick={onClick}
+                    className='text-grey-200 hover:text-yellow-100'
+                >
                     <AiFillEdit size='1.3rem' />
                 </button>
             </div>

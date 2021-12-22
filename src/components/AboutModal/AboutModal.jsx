@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { CheckButton, Modal, TextArea, TextInput } from '..';
-import { useSelector, useDispatch } from 'react-redux';
+import { CheckButton, Loader, Modal, TextArea, TextInput } from '..';
+import { useDispatch } from 'react-redux';
 import { editAboutInfo } from '../../store/userSlice';
 import { Bounce, toast } from 'react-toastify';
+import { editAbout } from '../../http';
 const AboutModal = ({ onClose, user }) => {
     const dispatch = useDispatch();
     const { links, bio, phone, gender, roomAddress } = user;
@@ -12,8 +13,8 @@ const AboutModal = ({ onClose, user }) => {
     const [userPhone, setUserPhone] = useState(phone);
     const [userRoomAddress, setUserRoomAddress] = useState(roomAddress);
     const [userGender, setUserGender] = useState(gender);
-
-    const onAboutSubmit = () => {
+    const [loading, setLoading] = useState(false);
+    const onAboutSubmit = async () => {
         //verification
         if (!userPhone || !userBio || !userGender) {
             return toast.error('All fields are mandatory!', {
@@ -29,24 +30,46 @@ const AboutModal = ({ onClose, user }) => {
                 theme: 'dark',
             });
         }
-        //set new data in redux store
-        dispatch(
-            editAboutInfo({
+        if (
+            phone === userPhone &&
+            bio === userBio &&
+            gender === userGender &&
+            roomAddress === userRoomAddress &&
+            links.github === userLinks.github &&
+            links.linkedin === userLinks.linkedin
+        ) {
+            //if no editing is there then ---> simply close the modal
+            onClose();
+        } else {
+            const updatedDataToSend = {
                 links: userLinks,
                 bio: userBio,
                 phone: userPhone,
                 roomAddress: userRoomAddress,
                 gender: userGender,
-            })
-        );
-        //make the backend api call for submitting new data here
+            };
 
-        onClose();
+            //set new data in redux store
+            setLoading(true);
+            dispatch(
+                editAboutInfo({
+                    links: userLinks,
+                    bio: userBio,
+                    phone: userPhone,
+                    roomAddress: userRoomAddress,
+                    gender: userGender,
+                })
+            );
+            //make the backend api call for submitting new data here
+            await editAbout(updatedDataToSend);
+            setLoading(false);
+            onClose();
+        }
     };
     const genderChange = (e) => {
         setUserGender(e.target.value);
     };
-
+    if (loading) return <Loader message='Loading...' />;
     return (
         <div>
             <Modal

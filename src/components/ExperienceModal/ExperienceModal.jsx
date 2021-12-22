@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Checkbox, Modal, TextInput } from '..';
 import { useDispatch } from 'react-redux';
 import { addExperienceInfo } from '../../store/userSlice';
-
+import { addExperience } from '../../http';
+import { Bounce, toast } from 'react-toastify';
 //To get the current date in desired format
 var today = new Date();
 var dd = today.getDate();
@@ -23,18 +24,28 @@ const ExperienceModal = ({ onClose }) => {
     const [userJoiningDate, setUserJoiningDate] = useState('');
     const [userLeavingDate, setUserLeavingDate] = useState('');
 
-    const onExperienceSubmit = () => {
-        dispatch(
-            addExperienceInfo({
-                company: userCompany,
-                role: userRole,
-                currentlyWorking,
-                dates: {
-                    joining: userJoiningDate,
-                    leaving: userLeavingDate,
-                },
-            })
-        );
+    const onExperienceSubmit = async () => {
+        if (
+            !userRole ||
+            !userCompany ||
+            userJoiningDate ||
+            (currentlyWorking && !userLeavingDate)
+        ) {
+            return toast.error('All fields are mandatory!', {
+                transition: Bounce,
+                autoClose: 5000,
+                theme: 'dark',
+            });
+        }
+        //make backend call
+        const { data } = await addExperience({
+            title: userRole,
+            company: userCompany,
+            isCurrent: currentlyWorking,
+            startDate: userJoiningDate,
+            endDate: userLeavingDate,
+        });
+        dispatch(addExperienceInfo(data));
         onClose();
     };
 

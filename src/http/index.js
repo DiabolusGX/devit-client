@@ -32,10 +32,18 @@ export const logout = () => {
 };
 
 //edit endpoints
-export const editNamePhoto = (data) => {
-    return api.post('/api/v1/user/profile/edit/namePhoto', data);
+export const editHeader = (data) => {
+    return api.patch('/api/v1/user/profile/header', data);
 };
-
+export const editAbout = (data) => {
+    return api.patch('/api/v1/user/profile/about', data);
+};
+export const addExperience = (data) => {
+    return api.post('/api/v1/user/experience/add', data);
+};
+export const removeExperience = (data) => {
+    return api.delete('/api/v1/user/experience/delete', data);
+};
 // export const getAllRooms = () => {
 //     return api.get('/api/rooms');
 // };
