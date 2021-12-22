@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Modal, TextInput } from '..';
+import { Loader, Modal, TextInput } from '..';
 import { BsArrowRightShort } from 'react-icons/bs';
-import { checkUsername, editNamePhoto } from '../../http';
-import { editNamePhotoInfo } from '../../store/userSlice';
+import { checkUsername, editHeader } from '../../http';
+import { editHeaderInfo } from '../../store/userSlice';
 import { Bounce, toast } from 'react-toastify';
-const ProfileNameModal = ({ onClose, user }) => {
+
+const HeaderModal = ({ onClose, user }) => {
     const dispatch = useDispatch();
-    const { name, username, avatar, banner } = user;
+    const { displayName, username, avatar, banner } = user;
     const [editedUsername, setEditedUsername] = useState(username);
-    const [editedName, setEditedName] = useState(name);
+    const [loading, setLoading] = useState(false);
+    const [editedName, setEditedName] = useState(displayName);
     const [editedAvatar, setEditedAvatar] = useState(avatar);
     const [editedBanner, setEditedBanner] = useState(banner);
     const [usernameIsValid, setUsernameIsValid] = useState(true);
+
     // on selecting an image
     const captureImage = (e) => {
         const file = e.target.files[0];
@@ -29,8 +32,9 @@ const ProfileNameModal = ({ onClose, user }) => {
     // on submission of the final data
     const onUserDataSubmit = async () => {
         //check if some editing has been made
+
         if (
-            name === editedName &&
+            displayName === editedName &&
             username === editedUsername &&
             avatar === editedAvatar &&
             banner === editedBanner
@@ -57,14 +61,19 @@ const ProfileNameModal = ({ onClose, user }) => {
 
             //make a post call to submit all the data
             const dataToSend = {
-                name: editedName,
+                displayName: editedName,
                 username: editedUsername,
                 avatar: editedAvatar,
                 banner: editedBanner,
             };
-            const { data } = await editNamePhoto(dataToSend);
+            console.log(dataToSend);
+            setLoading(true);
+            const { data } = await editHeader(dataToSend);
+
             //get the processed data(S3 img urls) and update that in ur redux store
-            dispatch(editNamePhotoInfo(data));
+            dispatch(editHeaderInfo(data));
+            setLoading(false);
+
             //close the modal
             onClose();
         }
@@ -85,8 +94,8 @@ const ProfileNameModal = ({ onClose, user }) => {
             console.log('Cleanup');
             clearTimeout(identifier);
         };
-    }, [editedUsername, setUsernameIsValid]);
-
+    }, [editedUsername, setUsernameIsValid, username]);
+    if (loading) return <Loader message='Updating.. Please wait!' />;
     return (
         <div>
             <Modal
@@ -101,7 +110,7 @@ const ProfileNameModal = ({ onClose, user }) => {
                             src={editedAvatar}
                             alt='avatar'
                         />
-                        <div>
+                        <div className='mb-2'>
                             <input
                                 onChange={captureImage}
                                 className='hidden'
@@ -110,7 +119,7 @@ const ProfileNameModal = ({ onClose, user }) => {
                             />
                             <label
                                 htmlFor='avatarInput'
-                                className='flex items-center ml-2 text-yellow-100 cursor-pointer text-sm font-medium'
+                                className='flex items-center ml-2 text-yellow-100 cursor-pointer text-sm'
                             >
                                 <span>Upload a new pic</span>
                                 <BsArrowRightShort size='1.5rem' />
@@ -119,12 +128,12 @@ const ProfileNameModal = ({ onClose, user }) => {
                     </div>
                     <div className='flex flex-col items-center mb-2'>
                         <img
-                            className='mb-1 w-4/5 h-28 border-2 border-yellow-100 rounded-lg'
+                            className='mb-1 w-4/5 h-28 border-2 border-yellow-100 object-cover rounded-lg'
                             // src='/images/optimistic.png'
                             src={editedBanner}
                             alt='avatar'
                         />
-                        <div>
+                        <div className='mb-2'>
                             <input
                                 onChange={captureImage}
                                 className='hidden'
@@ -133,7 +142,7 @@ const ProfileNameModal = ({ onClose, user }) => {
                             />
                             <label
                                 htmlFor='bannerInput'
-                                className='flex items-center ml-2 text-yellow-100 cursor-pointer text-sm font-medium'
+                                className='flex items-center ml-2 text-yellow-100 cursor-pointer text-sm'
                             >
                                 <span>Upload a new banner</span>
                                 <BsArrowRightShort size='1.5rem' />
@@ -142,7 +151,7 @@ const ProfileNameModal = ({ onClose, user }) => {
                     </div>
 
                     <div className='flex justify-around'>
-                        <div className='mr-1'>
+                        <div className='mr-2'>
                             <p className='mb-1  text-sm text-grey-200'>
                                 Username
                             </p>
@@ -190,4 +199,4 @@ const ProfileNameModal = ({ onClose, user }) => {
     );
 };
 
-export default ProfileNameModal;
+export default HeaderModal;

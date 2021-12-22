@@ -9,54 +9,79 @@ import {
     BsGenderFemale,
 } from 'react-icons/bs';
 import { AiFillEdit } from 'react-icons/ai';
-import { MdOutlineHouseSiding } from 'react-icons/md';
+import { MdOutlineHouseSiding, MdDeleteOutline } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { GiStarMedal, GiProcessor } from 'react-icons/gi';
 import PostInput from '../../components/shared/Inputs/PostInput/PostInput';
 import {
     AboutModal,
     ExperienceModal,
+    HeaderModal,
     LevelModal,
     Loader,
     Post,
     ProfileEditCard,
-    ProfileNameModal,
 } from '../../components';
-import { getUserProfile } from '../../http';
-import { setBasicUserData } from '../../store/userSlice';
+import { getUserProfile, removeExperience } from '../../http';
+import { removeExperienceInfo, setBasicUserData } from '../../store/userSlice';
 
 const Profile = () => {
     const dispatch = useDispatch();
     //fetching data from the user
     const { user } = useSelector((state) => state.user);
+
     //for differnt sections ---> such as Profile, Friends, Github etc
     const [page, setPage] = useState('Profile');
     const location = useLocation();
 
     //Modal states
+
     const [showAboutModal, setShowAboutModal] = useState(false);
     const [showExperienceModal, setShowExperienceModal] = useState(false);
     const [showLevelModal, setShowLevelModal] = useState(false);
-    const [showNameModal, setShowNameModal] = useState(false);
+    const [showHeaderModal, setShowHeaderModal] = useState(false);
 
     //for reload problem
     useEffect(() => {
         localStorage.setItem('currentPath', location.pathname);
         const fetchUser = async () => {
             const { data } = await getUserProfile();
-            dispatch(
-                setBasicUserData({ ...data, banner: '/images/optimistic.png' })
-            );
+            if (data.banner) {
+                dispatch(
+                    setBasicUserData({
+                        ...data,
+                    })
+                );
+            } else {
+                dispatch(
+                    setBasicUserData({
+                        ...data,
+                        banner: 'https://devit-files.s3.amazonaws.com/profile-banner',
+                    })
+                );
+            }
         };
         fetchUser();
     }, []);
+
+    //deleting a particular experience
+    const deleteExperienceHandler = async (e) => {
+        const experienceId = e.target.key;
+        //now make a call to delete that experience
+        try {
+            const { data } = await removeExperience(experienceId);
+            dispatch(removeExperienceInfo(data));
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     //action functions for opening the modals
     const editAbout = () => {
         setShowAboutModal(true);
     };
     const editName = () => {
-        setShowNameModal(true);
+        setShowHeaderModal(true);
     };
     const addExperiences = () => {
         setShowExperienceModal(true);
@@ -69,7 +94,9 @@ const Profile = () => {
     const optionHandler = (e) => {
         setPage(e.target.name);
     };
+
     if (!user) return <Loader message='Loading' />;
+
     return (
         <>
             <div
@@ -202,7 +229,7 @@ const Profile = () => {
                                     />
                                     <div>
                                         <h3 className='text-lg capitalize'>
-                                            {user?.name}
+                                            {user?.displayName}
                                         </h3>
                                         <p className='text-sm text-grey-200'>
                                             {user?.username}
@@ -257,7 +284,7 @@ const Profile = () => {
                                 </button>
                                 <button
                                     onClick={editName}
-                                    className='text-grey-200'
+                                    className='text-grey-200 hover:text-yellow-100'
                                 >
                                     <AiFillEdit size='1.3rem' />
                                 </button>
@@ -354,18 +381,32 @@ const Profile = () => {
                                                         (experience) => (
                                                             <div
                                                                 key={
-                                                                    experience.id
+                                                                    experience.uuid
                                                                 }
                                                                 className='mb-2'
                                                             >
-                                                                <h3
-                                                                    id='role'
-                                                                    className='text-yellow-100 font-medium'
-                                                                >
-                                                                    {
-                                                                        experience?.role
-                                                                    }
-                                                                </h3>
+                                                                <div className='flex items-center justify-between'>
+                                                                    <h3
+                                                                        id='role'
+                                                                        className='text-yellow-100 font-medium'
+                                                                    >
+                                                                        {
+                                                                            experience?.title
+                                                                        }
+                                                                    </h3>
+                                                                    <button
+                                                                        key={
+                                                                            experience?.uuid
+                                                                        }
+                                                                        onClick={
+                                                                            deleteExperienceHandler
+                                                                        }
+                                                                        className='text-grey-200 hover:text-yellow-100'
+                                                                    >
+                                                                        <MdDeleteOutline size='1.2rem' />
+                                                                    </button>
+                                                                </div>
+
                                                                 <h5
                                                                     id='company'
                                                                     className='text-grey-100'
@@ -379,16 +420,14 @@ const Profile = () => {
                                                                         id='joiningDate'
                                                                         className='text-sm text-grey-200 '
                                                                     >
-                                                                        {
-                                                                            experience
-                                                                                ?.dates
-                                                                                ?.joining
-                                                                        }
+                                                                        {new Date(
+                                                                            experience?.startDate
+                                                                        ).toDateString()}
                                                                     </h5>
                                                                     <h5 className='text-sm text-grey-200 mx-2'>
-                                                                        to
+                                                                        -
                                                                     </h5>
-                                                                    {experience.currentlyWorking ? (
+                                                                    {experience.isCurrent ? (
                                                                         <h5 className='text-sm text-grey-200'>
                                                                             Current
                                                                         </h5>
@@ -397,11 +436,9 @@ const Profile = () => {
                                                                             id='leaving date'
                                                                             className='text-sm text-grey-200'
                                                                         >
-                                                                            {
-                                                                                experience
-                                                                                    ?.dates
-                                                                                    ?.leaving
-                                                                            }
+                                                                            {new Date(
+                                                                                experience?.endDate
+                                                                            ).toDateString()}
                                                                         </h5>
                                                                     )}
                                                                 </div>
@@ -444,10 +481,10 @@ const Profile = () => {
             {showLevelModal && (
                 <LevelModal onClose={() => setShowLevelModal(false)} />
             )}
-            {showNameModal && (
-                <ProfileNameModal
+            {showHeaderModal && (
+                <HeaderModal
                     user={user}
-                    onClose={() => setShowNameModal(false)}
+                    onClose={() => setShowHeaderModal(false)}
                 />
             )}
         </>
