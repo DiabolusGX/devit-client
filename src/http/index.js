@@ -44,8 +44,10 @@ export const addExperience = (data) => {
 export const removeExperience = (data) => {
     return api.delete('/api/v1/user/experience/delete', data);
 };
-// export const getAllRooms = () => {
-//     return api.get('/api/rooms');
-// };
+
+//room endpoints
+export const addRoomRequest = (data) => {
+    return api.post('/api/v1/rooms/add', data);
+};
 
 export default api;
