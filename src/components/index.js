@@ -8,6 +8,7 @@ export { default as TestimonialSlider } from './TestimonialSlider/TestimonialSli
 export { default as FeatureCard } from './shared/FeatureCard/FeatureCard';
 export { default as ImgCard } from './shared/Cards/ImgCard/ImgCard';
 export { default as Card } from './shared/Cards/Card/Card';
+export { default as RoomCard } from './shared/Cards/RoomCard/RoomCard';
 export { default as ProfileEditCard } from './shared/Cards/ProfileEditCard/ProfileEditCard';
 export { default as InformationCard } from './shared/Cards/InformationCard/InformationCard';
 export { default as TextInput } from './shared/Inputs/TextInput/TextInput';

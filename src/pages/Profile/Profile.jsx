@@ -27,7 +27,7 @@ import { removeExperienceInfo, setBasicUserData } from '../../store/userSlice';
 
 const Profile = () => {
     const dispatch = useDispatch();
-    //fetching data from the user
+    //getting user data from store
     const { user } = useSelector((state) => state.user);
 
     //for differnt sections ---> such as Profile, Friends, Github etc
