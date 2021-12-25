@@ -9,7 +9,7 @@ import { Card, ImgCard } from '../../../../components';
 import { setAvatar } from '../../../../store/activateSlice';
 const StepAvatar = ({ changeStep, backStep }) => {
     const { username } = useSelector((state) => state.activate);
-    const { user } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const [image, setImage] = useState(user.avatar);
     const captureImage = (e) => {

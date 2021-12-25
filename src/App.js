@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAuthorizedUser } from './http';
-import { setAuth } from './store/authSlice';
+import { setAuth } from './store/userSlice';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
@@ -73,7 +73,7 @@ function App() {
     );
 }
 const GuestRoute = ({ component }) => {
-    const { isAuth } = useSelector((state) => state.auth);
+    const { isAuth } = useSelector((state) => state.user);
     let currentPath = localStorage.getItem('currentPath');
     if (!currentPath) {
         currentPath = '/dashboard';
@@ -81,7 +81,7 @@ const GuestRoute = ({ component }) => {
     return isAuth ? <Navigate to={currentPath} /> : component;
 };
 const SemiProtectedRoute = ({ component }) => {
-    const { isAuth, user } = useSelector((state) => state.auth);
+    const { isAuth, user } = useSelector((state) => state.user);
 
     return !isAuth ? (
         <Navigate replace to='/authenticate' />
@@ -92,7 +92,7 @@ const SemiProtectedRoute = ({ component }) => {
     );
 };
 const ProtectedRoute = ({ component }) => {
-    const { isAuth, user } = useSelector((state) => state.auth);
+    const { isAuth, user } = useSelector((state) => state.user);
 
     return !isAuth ? (
         <Navigate replace to='/authenticate' />

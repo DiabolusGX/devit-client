@@ -41,13 +41,18 @@ export const editAbout = (data) => {
 export const addExperience = (data) => {
     return api.post('/api/v1/user/experience/add', data);
 };
-export const removeExperience = (data) => {
-    return api.delete('/api/v1/user/experience/delete', data);
+export const removeExperience = (experienceId) => {
+    return api.delete(`/api/v1/user/experience/${experienceId}`);
 };
 
 //room endpoints
 export const addRoomRequest = (data) => {
-    return api.post('/api/v1/rooms/add', data);
+    return api.post('/api/v1/rooms/create', data);
 };
-
+export const getAllRoomsRequest = () => {
+    return api.get('/api/v1/rooms');
+};
+export const joinRoomRequest = (roomID, data) => {
+    return api.post(`/api/v1/rooms/join/${roomID}`, data);
+};
 export default api;

@@ -28,8 +28,8 @@ const ExperienceModal = ({ onClose }) => {
         if (
             !userRole ||
             !userCompany ||
-            userJoiningDate ||
-            (currentlyWorking && !userLeavingDate)
+            !userJoiningDate ||
+            (!currentlyWorking && !userLeavingDate)
         ) {
             return toast.error('All fields are mandatory!', {
                 transition: Bounce,
@@ -93,19 +93,19 @@ const ExperienceModal = ({ onClose }) => {
                                     }
                                 />
                             </div>
-                            {!currentlyWorking && (
-                                <div className=''>
-                                    <TextInput
-                                        type='date'
-                                        min='1899-01-01'
-                                        max={today}
-                                        value={userLeavingDate}
-                                        onChange={(e) =>
-                                            setUserLeavingDate(e.target.value)
-                                        }
-                                    />
-                                </div>
-                            )}
+
+                            <div className=''>
+                                <TextInput
+                                    disabled={currentlyWorking}
+                                    type='date'
+                                    min='1899-01-01'
+                                    max={today}
+                                    value={userLeavingDate}
+                                    onChange={(e) =>
+                                        setUserLeavingDate(e.target.value)
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

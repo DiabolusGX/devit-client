@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { OutlinedButton, PrimaryButton, SecondaryButton } from '../../..';
 import { BsCardImage } from 'react-icons/bs';
 const PostInput = () => {
-    const { user } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.user);
     return (
         <div className='bg-black-400 rounded-2xl py-3 px-5'>
             <div className='flex items-center'>
