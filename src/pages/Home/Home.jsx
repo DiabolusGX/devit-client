@@ -4,7 +4,7 @@ import { GiTriorb, GiAbstract097, GiTrinacria } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 const Home = () => {
-    const { isAuth } = useSelector((state) => state.auth);
+    const { isAuth } = useSelector((state) => state.user);
     return (
         <div id='home' className='text-grey-100 relative'>
             <img

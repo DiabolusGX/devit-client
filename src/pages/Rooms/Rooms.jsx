@@ -3,16 +3,24 @@ import { useLocation } from 'react-router';
 import { BiSearch } from 'react-icons/bi';
 import { MdAddCircleOutline } from 'react-icons/md';
 import CreateRoomModal from './CreateRoomModal/CreateRoomModal';
-import { useSelector } from 'react-redux';
-import { RoomCard } from '../../components';
+import { useSelector, useDispatch } from 'react-redux';
+import { Loader, RoomCard } from '../../components';
+import { getAllRoomsRequest } from '../../http';
+import { getAllRooms } from '../../store/roomsSlice';
 
 const Rooms = () => {
     const location = useLocation();
+    const dispatch = useDispatch();
     const [showRoomModal, setShowRoomModal] = useState(false);
     const { rooms } = useSelector((state) => state.rooms);
     useEffect(() => {
         localStorage.setItem('currentPath', location.pathname);
+        (async () => {
+            const { data } = await getAllRoomsRequest();
+            dispatch(getAllRooms(data));
+        })();
     }, []);
+    if (!rooms) return <Loader message='Loading' />;
     return (
         <>
             <div className='px-20 height_minus_nav_og_global '>
@@ -27,6 +35,7 @@ const Rooms = () => {
                             </div>
 
                             <input
+                                placeholder='Search Rooms'
                                 className='bg-black-300 border-2 border-black-300 py-2 px-4 text-grey-100 placeholder-grey-200 rounded-full focus:border-yellow-100 focus:outline-none'
                                 type='text'
                                 name='searchRoom'

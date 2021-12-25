@@ -9,7 +9,7 @@ import {
     TextInput,
 } from '../../../../components';
 import { Bounce, toast } from 'react-toastify';
-import { setAuth } from '../.././../../store/authSlice';
+import { setAuth } from '../.././../../store/userSlice';
 import { setPersonalInfo } from '../../../../store/activateSlice';
 import { activate } from '../../../../http';
 

@@ -36,6 +36,7 @@ const CreateRoomModal = ({ onClose }) => {
             topic: roomTopic,
             icon,
         });
+
         dispatch(addRoom(data));
         onClose();
     };

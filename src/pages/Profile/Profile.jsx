@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import {
     BsFillPeopleFill,
     BsLinkedin,
@@ -9,7 +10,7 @@ import {
     BsGenderFemale,
 } from 'react-icons/bs';
 import { AiFillEdit } from 'react-icons/ai';
-import { MdOutlineHouseSiding, MdDeleteOutline } from 'react-icons/md';
+import { MdOutlineHouseSiding } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { GiStarMedal, GiProcessor } from 'react-icons/gi';
 import PostInput from '../../components/shared/Inputs/PostInput/PostInput';
@@ -66,7 +67,7 @@ const Profile = () => {
 
     //deleting a particular experience
     const deleteExperienceHandler = async (e) => {
-        const experienceId = e.target.key;
+        const experienceId = e.target.id;
         //now make a call to delete that experience
         try {
             const { data } = await removeExperience(experienceId);
@@ -95,7 +96,7 @@ const Profile = () => {
         setPage(e.target.name);
     };
 
-    if (!user) return <Loader message='Loading' />;
+    if (!user.banner) return <Loader message='Loading' />;
 
     return (
         <>
@@ -372,12 +373,12 @@ const Profile = () => {
                                             </ProfileEditCard>
                                         </div>
                                         <div>
-                                            {user?.experiences ? (
+                                            {user?.experiences.length > 0 ? (
                                                 <ProfileEditCard
                                                     onClick={addExperiences}
                                                     heading='Experience'
                                                 >
-                                                    {user?.experiences.map(
+                                                    {user?.experiences?.map(
                                                         (experience) => (
                                                             <div
                                                                 key={
@@ -394,17 +395,18 @@ const Profile = () => {
                                                                             experience?.title
                                                                         }
                                                                     </h3>
-                                                                    <button
-                                                                        key={
+
+                                                                    <img
+                                                                        id={
                                                                             experience?.uuid
                                                                         }
                                                                         onClick={
                                                                             deleteExperienceHandler
                                                                         }
-                                                                        className='text-grey-200 hover:text-yellow-100'
-                                                                    >
-                                                                        <MdDeleteOutline size='1.2rem' />
-                                                                    </button>
+                                                                        className='w-4  cursor-pointer'
+                                                                        src='/images/delete.png'
+                                                                        alt='deleteIcon'
+                                                                    />
                                                                 </div>
 
                                                                 <h5

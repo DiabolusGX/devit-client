@@ -1,7 +1,7 @@
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import './Modal.scss';
 
-const Modal = ({ heading, onClose, children, onSubmit }) => {
+const Modal = ({ icon, heading, onClose, children, onSubmit }) => {
     return (
         <div className='mask_og fixed top-0 right-0 left-0 bottom-0 flex justify-center items-center '>
             <div
@@ -10,7 +10,13 @@ const Modal = ({ heading, onClose, children, onSubmit }) => {
             >
                 <div className=' py-4  px-8 border-b-2 border-grey-200  '>
                     <div className='mb-4 flex items-center justify-between text-white-100'>
-                        <h3 className='font-medium text-xl mr-6'>{heading}</h3>
+                        <div className='flex items-center'>
+                            {icon}
+                            <h3 className='font-medium text-xl ml-2 mr-6'>
+                                {heading}
+                            </h3>
+                        </div>
+
                         <button
                             className=' rounded-full p-2 hover:text-red-200'
                             onClick={onClose}
