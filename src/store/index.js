@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import auth from './authSlice';
 import activate from './activateSlice';
 import user from './userSlice';
 import rooms from './roomsSlice';
